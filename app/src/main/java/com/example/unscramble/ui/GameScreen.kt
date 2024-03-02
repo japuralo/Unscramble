@@ -74,7 +74,8 @@ fun GameScreen(
             .padding(mediumPadding),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    )
+    {
 
         Text(
             text = stringResource(R.string.app_name),
@@ -123,6 +124,13 @@ fun GameScreen(
         }
 
         GameStatus(score = gameUiState.score, modifier = Modifier.padding(20.dp))
+    }
+    if (gameUiState.isGameOver)
+    {
+        FinalScoreDialog(
+            score = gameUiState.score,
+            onPlayAgain = { gameViewModel.resetGame() }
+        )
     }
 }
 
@@ -214,7 +222,8 @@ private fun FinalScoreDialog(
     score: Int,
     onPlayAgain: () -> Unit,
     modifier: Modifier = Modifier
-) {
+)
+{
     val activity = (LocalContext.current as Activity)
 
     AlertDialog(
